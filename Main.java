@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ class Main {
       + "\tlist:\tLists movies in collection\n"
       + "\trent:\tRents a movie\n"
       + "\tstat:\tChecks rent statement\n"
+      + "\thtml:\tChecks rent statement in browser\n"
       + "\texit:\texits the program\n";
 
   public static void main(String[] args) {
@@ -93,6 +95,17 @@ class Main {
       case "stat":
         System.out.println(
             customer.statement());
+        break;
+
+      case "html":
+        try (PrintWriter out = new PrintWriter("stat.html")) {
+          out.write(customer.htmlStatement());
+          out.flush();
+          out.close();
+          System.out.println("Check stat.html file.");
+        } catch (Exception e) {
+          System.out.println("Generating html failed!");
+        }
         break;
 
       default:

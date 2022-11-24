@@ -9,4 +9,5 @@ rent
 Harry Potter
 4
 stat
+html
 exit
