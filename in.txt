@@ -1,0 +1,12 @@
+John
+create
+Harry Potter
+0
+create
+Hobbit
+1
+rent
+Harry Potter
+4
+stat
+exit
