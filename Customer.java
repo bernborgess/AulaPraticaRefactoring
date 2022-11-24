@@ -17,30 +17,15 @@ public class Customer {
     return _name;
   }
 
-  public String statement() {
-    // double totalAmount = 0;
-    // int frequentRenterPoints = 0;
-
-    Enumeration<Rental> rentals = _rentals.elements();
-    String result = "Rental Record for " + getName() + "\n";
-    while (rentals.hasMoreElements()) {
-      Rental each = rentals.nextElement();
-
-      // frequentRenterPoints += each.getFrequentRenterPoints();
-
-      result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
-      // totalAmount += each.getCharge();
-
-    }
-    result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-
-    result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
-        " frequent renter points";
-
-    return result;
+  public Enumeration<Rental> getRentals() {
+    return _rentals.elements();
   }
 
-  private double getTotalCharge() {
+  public String statement() {
+    return new TextStatement().value(this);
+  }
+
+  public double getTotalCharge() {
     double result = 0;
     Enumeration<Rental> rentals = _rentals.elements();
     while (rentals.hasMoreElements()) {
@@ -50,7 +35,7 @@ public class Customer {
     return result;
   }
 
-  private double getTotalFrequentRenterPoints() {
+  public double getTotalFrequentRenterPoints() {
     double result = 0;
     Enumeration<Rental> rentals = _rentals.elements();
     while (rentals.hasMoreElements()) {
@@ -61,17 +46,7 @@ public class Customer {
   }
 
   public String htmlStatement() {
-    Enumeration<Rental> rentals = _rentals.elements();
-    String result = "<h1>Rentals for <em>" + getName() + "</em><h1><p>\n";
-    while (rentals.hasMoreElements()) {
-      Rental each = rentals.nextElement();
-      result += each.getMovie().getTitle() + ": "
-          + String.valueOf(each.getCharge()) + "<br>\n";
-    }
-    result += "<p>You owe <em>" + String.valueOf(getTotalCharge()) + "</em><p>\n";
-    result += "On this rental you earned <em>" +
-        String.valueOf(getTotalFrequentRenterPoints())
-        + "</em> frequent renter points<p>";
-    return result;
+    return new HtmlStatement().value(this);
+
   }
 }
